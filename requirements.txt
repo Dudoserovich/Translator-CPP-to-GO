@@ -1,0 +1,17 @@
+anytree==2.8.0
+argcomplete==2.0.0
+colorama==0.4.6
+etcd-distro==3.5.1
+future==0.18.2
+grammar==1.6
+numpy==1.24.1
+pandas==1.5.2
+psutil==5.9.4
+pyarrow==10.0.1
+python-dateutil==2.8.2
+pytz==2022.7
+six==1.16.0
+sortedcontainers==2.4.0
+termcolor==2.2.0
+treelib==1.6.1
+vineyard==0.11.4
