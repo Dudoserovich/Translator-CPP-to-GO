@@ -2,7 +2,7 @@
 .idea
 
 # dev файлы и папки
-results/*
+test_result_parse/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
