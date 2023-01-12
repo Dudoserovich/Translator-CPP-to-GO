@@ -8,7 +8,7 @@ class Generator:
 
         pass
 
-    def late(self, parsed: list):
+    def late(self, parsed: list, filename: str):
         go_skeleton = self.__main_change(parsed)
         print("-------")
         # print(go_skeleton)
@@ -17,7 +17,8 @@ class Generator:
         # go_loops = self.loops(go_skeleton)
         go_loops = self.find_and_replace_loop(go_skeleton, 0)
         go_types = self.types(go_loops)
-        self.__to_go(go_types, "test")
+
+        self.__to_go(go_types, filename)
 
     def __main_change(self, parsed: list):
         parsed[0] = ["func", 'GO', parsed[0][2]]
@@ -180,12 +181,13 @@ class Generator:
             print("new_loop: ", new_loop)
             return new_loop
 
-    def __to_go(self, parsed, name):
+    def __to_go(self, parsed, filename):
         # name - string w/o .cpp or .go
         spec = ["N", "D1"]
         open_bracket_count = 0
 
-        f = open(name + ".go", "w+")
+        f = open('test_result_parse/{filename}.go'.format(filename=filename), 'w+')
+        # f = open(filename + ".go", "w+")
 
         line_number = 1
         for element in parsed:

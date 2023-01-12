@@ -41,7 +41,9 @@ class EarleyParser:
         sem = CppSemanticsAnalyzer(self.tree)
 
         if sem.check_semantic():
-            sys.exit()
+            self.print_tree()
+            # sys.exit()
+            return self.get_new_lex()
 
         print("_______OPTIMIZER________")
         sem.optimizer()
