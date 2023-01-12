@@ -1,8 +1,6 @@
 package main 
 
 func main ( ) { 
-	
-	var r int = 10; 
 	var c int = 10; 
 	var r int = 0; 
 	
@@ -27,7 +25,7 @@ func main ( ) {
 		r = r + 1; 
 	} 
 	
-	for ok := true; ok; ok = (r<100) { 
+	for ok := true; ok; ok = (r<=30) { 
 		r = r + 1; 
 		for ok := true; ok; ok = (c<=5000) { 
 			c = c + 20; 
