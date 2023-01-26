@@ -15,9 +15,9 @@ class TestMain(unittest.TestCase):
         translator.translator(file_name, config.RESULTS_PATH, config.TESTS_PATH)
 
         with open(f'{config.RESULTS_PATH}/{file_name}.go', 'r') as f:
-            result = f.read()
+            result = f.read().replace("\r\n", "\n")
         with open(f'{config.EXPECTED_PATH}/{file_name}.go', 'r') as f:
-            expected = f.read()
+            expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_if_then(self):
@@ -25,9 +25,9 @@ class TestMain(unittest.TestCase):
         translator.translator(file_name, config.RESULTS_PATH, config.TESTS_PATH)
 
         with open(f'{config.RESULTS_PATH}/{file_name}.go', 'r') as f:
-            result = f.read()
+            result = f.read().replace("\r\n", "\n")
         with open(f'{config.EXPECTED_PATH}/{file_name}.go', 'r') as f:
-            expected = f.read()
+            expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_infernal_loops(self):
@@ -35,9 +35,9 @@ class TestMain(unittest.TestCase):
         translator.translator(file_name, config.RESULTS_PATH, config.TESTS_PATH)
 
         with open(f'{config.RESULTS_PATH}/{file_name}.go', 'r') as f:
-            result = f.read()
+            result = f.read().replace("\r\n", "\n")
         with open(f'{config.EXPECTED_PATH}/{file_name}.go', 'r') as f:
-            expected = f.read()
+            expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_loops(self):
@@ -45,9 +45,9 @@ class TestMain(unittest.TestCase):
         translator.translator(file_name, config.RESULTS_PATH, config.TESTS_PATH)
 
         with open(f'{config.RESULTS_PATH}/{file_name}.go', 'r') as f:
-            result = f.read()
+            result = f.read().replace("\r\n", "\n")
         with open(f'{config.EXPECTED_PATH}/{file_name}.go', 'r') as f:
-            expected = f.read()
+            expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_lex(self):
@@ -55,9 +55,9 @@ class TestMain(unittest.TestCase):
         translator.translator(file_name, config.RESULTS_PATH, config.TESTS_PATH)
 
         with open(f'{config.RESULTS_PATH}/{file_name}.go', 'r') as f:
-            result = f.read()
+            result = f.read().replace("\r\n", "\n")
         with open(f'{config.EXPECTED_PATH}/{file_name}.go', 'r') as f:
-            expected = f.read()
+            expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_operators(self):
@@ -65,9 +65,9 @@ class TestMain(unittest.TestCase):
         translator.translator(file_name, config.RESULTS_PATH, config.TESTS_PATH)
 
         with open(f'{config.RESULTS_PATH}/{file_name}.go', 'r') as f:
-            result = f.read()
+            result = f.read().replace("\r\n", "\n")
         with open(f'{config.EXPECTED_PATH}/{file_name}.go', 'r') as f:
-            expected = f.read()
+            expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_types(self):
@@ -75,7 +75,7 @@ class TestMain(unittest.TestCase):
         translator.translator(file_name, config.RESULTS_PATH, config.TESTS_PATH)
 
         with open(f'{config.RESULTS_PATH}/{file_name}.go', 'r') as f:
-            result = f.read()
+            result = f.read().replace("\r\n", "\n")
         with open(f'{config.EXPECTED_PATH}/{file_name}.go', 'r') as f:
-            expected = f.read()
+            expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
