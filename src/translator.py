@@ -17,13 +17,15 @@ def translator(file_name, results_path, tests_path):
     importlib.reload(gen)
     importlib.reload(ep)
 
-    kek = ep.EarleyParser(ep.lex.CppLexAnalyzer(), cpp_grammar.set_cpp())
-
     while ind:
         try:
+            kek = ep.EarleyParser(ep.lex.CppLexAnalyzer(), cpp_grammar.set_cpp())
             with open(f'{tests_path}/{file_name}.cpp', 'r') as f:
                 parsed = parsed if parsed else kek.parse(f)
                 print(f"parse result:\n{parsed}")
+                if file_name == 'if_then':
+                    with open("1", "w+") as ff:
+                        ff.write(str(parsed))
                 gen.Generator().late(parsed, f"{results_path}/{file_name}.go")
         except FileNotFoundError as e:
             if e.filename == f'{tests_path}/{file_name}.cpp':
@@ -32,6 +34,14 @@ def translator(file_name, results_path, tests_path):
             else:
                 import os
                 os.mkdir(results_path)
+
+                importlib.reload(cpp_grammar)
+                importlib.reload(gen)
+                importlib.reload(ep)
+
+                kek = ep.EarleyParser(ep.lex.CppLexAnalyzer(), cpp_grammar.set_cpp())
+                parsed = None
+
         else:
             ind = False
 
