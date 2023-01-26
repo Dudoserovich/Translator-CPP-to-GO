@@ -5,10 +5,11 @@ from src.parser.situation import Situation
 
 
 class Earley:
-    __states = []
-    __grammar = None
-    __lex_list = None
-    __pi = []
+    def __init__(self):
+        self.__states = []
+        self.__grammar = None
+        self.__lex_list = None
+        self.__pi = []
 
     def print_state(self, state, j):
         print("State " + str(j))

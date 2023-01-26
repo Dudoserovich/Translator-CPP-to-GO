@@ -12,7 +12,7 @@ int main() {
 
     do {
         r = r + 1;
-    } 
+    }
     while (r <= 30);
 
     return 0;
