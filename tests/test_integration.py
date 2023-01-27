@@ -9,7 +9,7 @@ import src.translator as translator
 import config
 
 
-class TestMain(unittest.TestCase):
+class TestIntegration(unittest.TestCase):
     def test_main(self):
         file_name = 'main'
         translator.translator(file_name, config.RESULTS_PATH, config.TESTS_PATH)

@@ -8,19 +8,19 @@ class Term:
         self.line = line
         self.lex = lex
 
-    def value(self):
+    def get_value(self):
         return self.value
 
-    def lex(self):
+    def get_lex(self):
         return self.lex
 
-    def line(self):
+    def get_line(self):
         return self.line
 
-    def setlex(self, lex):
+    def set_lex(self, lex):
         self.lex = lex
 
-    def setline(self, line):
+    def set_line(self, line):
         self.line = line
 
 
@@ -39,7 +39,7 @@ class Rule:
 
 class Grammar:
 
-    def __init__(self, rules, nonterminal, terminal, s: Term):
+    def __init__(self, rules: [Rule], nonterminal: [Term], terminal: [Term], s: Term):
         self.rules = rules
         self.terminal = terminal
         self.nonterminal = nonterminal
@@ -60,7 +60,7 @@ class Grammar:
         if r1.left.value != r2.left.value or len(r1.right) != len(r2.right):
             return False
         for i, t in enumerate(r1.right):
-            if t.value != r2.right[i].value:
+            if t.get_value() != r2.right[i].get_value():
                 return False
         return True
 
@@ -87,22 +87,23 @@ class Grammar:
 
     def is_terminal(self, t: Term):
         for term in self.terminal:
-            if t.value == term.value:
+            if t.value == term.get_value():
                 return True
         return False
 
     def is_nonterminal(self, t: Term):
         for term in self.nonterminal:
-            if t.value == term.value:
+            if t.value == term.get_value():
                 return True
         return False
 
     def print_rule(self, i):
         rule = self.rules[i]
-        s = str(i) + ": " + rule.left.value + "->"
+        s = str(i) + ": " + rule.left.get_value() + "->"
         for t in rule.right:
-            s += t.value + " "
+            s += t.get_value() + " "
         print(s)
+        return s
 
     def get_rule(self, i):
         return self.rules[i]

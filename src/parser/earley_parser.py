@@ -147,8 +147,8 @@ class EarleyParser:
     def add_children(self, term, parent, depth) -> None:
         if self.__grammar.is_terminal(term):
             curr_lex = self.lex_list.pop()
-            term.setlex(curr_lex[0])
-            term.setline(curr_lex[2])
+            term.set_lex(curr_lex[0])
+            term.set_line(curr_lex[2])
             return
         else:
             rule = self.__grammar.get_rule(self.pi.pop())
