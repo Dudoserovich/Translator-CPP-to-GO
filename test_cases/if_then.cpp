@@ -1,5 +1,4 @@
 int main(){
-    // 2
     int a = 1;
     int c;
 
@@ -7,7 +6,7 @@ int main(){
         c = 0;
     }
 
-    if (a == 2) { 
+    if (a == 2) {
         c = 1;
     } else {
         c = 2;
@@ -20,6 +19,6 @@ int main(){
     } else {
         c = 5;
     }
-    
+
     return c;
 }

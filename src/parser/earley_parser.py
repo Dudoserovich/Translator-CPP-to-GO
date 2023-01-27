@@ -14,15 +14,16 @@ from src.analyzers.semantics_analyzer import CppSemanticsAnalyzer
 
 
 class EarleyParser:
-    __earley = Earley()
-
-    tree = None
-    lex_list = []
+    # __earley = Earley()
 
     def __init__(self, lexer: lex.CppLexAnalyzer, g: gr.Grammar):
         self.__lex = lexer
         self.__grammar = g
         self.pi = None
+
+        self.__earley = Earley()
+        self.tree = None
+        self.lex_list = []
 
     def parse(self, file):
         self.lex_list = self.__lex.analysis(file)

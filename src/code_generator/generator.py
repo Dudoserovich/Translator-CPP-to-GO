@@ -1,5 +1,7 @@
 from termcolor import colored
 
+import config
+
 
 class Generator:
     def __init__(self):
@@ -186,8 +188,8 @@ class Generator:
         spec = ["N", "D1"]
         open_bracket_count = 0
 
-        f = open('test_result_parse/{filename}.go'.format(filename=filename), 'w+')
-        # f = open(filename + ".go", "w+")
+        # f = open('{results_path}/{filename}.go'.format(results_path=config.RESULTS_PATH, filename=filename), 'w+')
+        f = open(filename, "w+")
 
         line_number = 1
         for element in parsed:
