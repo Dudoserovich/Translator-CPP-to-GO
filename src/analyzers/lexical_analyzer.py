@@ -26,10 +26,14 @@ class CppLexAnalyzer:
 
             for c in line:
                 if c == '&' or c == '|' or c == '<' or c == '>' or c == '!' or c == '=':
+                    # Если передан пустой буфер(начальное значение),
+                    #   нужно закинуть в него символ (c)
                     if buffer == '':
                         buffer += c
                         continue
-                    if buffer != '':
+
+                    # Обработка операторов
+                    elif buffer != '':
                         if buffer == c and (buffer == '&' or buffer == '|' or buffer == '='):
                             buffer += c
                             result.append([buffer, OPERATOR[buffer], i])
@@ -46,6 +50,8 @@ class CppLexAnalyzer:
                             return 'ERROR IN LINE ' + str(i) + ": WRONG LOGIC OPERATOR " + str(c)
                         else:
                             result.append([c, OPERATOR[c], i])
+
+                # Обработка всего оставшегося
                 elif c in OPERATOR or c in DIVIDER or c == ' ' or c == '\n':
                     if buffer != '':
                         if str.isdigit(buffer):
@@ -73,6 +79,7 @@ class CppLexAnalyzer:
                             result.append([c, OPERATOR[c], i])
                         elif c in DIVIDER:
                             result.append([c, DIVIDER[c], i])
+                # Обработка символа переноса
                 elif c == '\'':
                     if buffer == '':
                         buffer += c

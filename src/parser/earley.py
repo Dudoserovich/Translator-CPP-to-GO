@@ -55,6 +55,7 @@ class Earley:
         for j in range(1, len(lex_list) + 1):
             j_state = self.__create_j_state(j, gr.Term(copy.deepcopy(lex_list[j - 1][1])))
             if j_state is None:
+                print(j)
                 # pos = self.get_pos_in_string(lex_list, lex_list[j - 1], j - 1)
                 return "ERROR IN LINE " + str(lex_list[j - 1][2]) + " IN " + str(lex_list[j - 1][0])
             else:
