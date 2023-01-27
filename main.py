@@ -1,14 +1,13 @@
+import os
+import sys
 import config
 
+from src.translator import translator
+
+
 if __name__ == '__main__':
-    import sys
-    from translator import translator
-
-    if len(sys.argv) > 1:
-        filename = sys.argv[1]
-        translator(filename, config.RESULTS_PATH, "./")
-    else:
-        filename = 'main'
-        translator(filename, config.RESULTS_PATH, config.TESTS_PATH)
-
-
+    for root, dirs, files in os.walk(config.TESTS_PATH):
+        for filename in files:
+            print(filename.replace('.cpp', ''))
+    # filename = sys.argv[1] if len(sys.argv) > 1 else 'main'
+    # translator(filename, config.RESULTS_PATH, config.TESTS_PATH)

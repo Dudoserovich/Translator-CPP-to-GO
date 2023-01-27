@@ -46,7 +46,7 @@ source venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
-#### Запуск
+#### Запуск main.py
 
 ```sh
 python3 main.py
@@ -55,3 +55,9 @@ python3 main.py
 > _P.S._ После `main.py` можно указать название файла 
 без расширения из директории `test_case` 
 для передачи транслятору файла отличного от `main.cpp`
+
+#### Запуск тестов
+
+```sh
+pytest tests/tests.py
+```

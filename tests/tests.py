@@ -2,10 +2,11 @@ import unittest
 
 import sys
 import os
-sys.path.insert(1, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 
 import test_config as config
+
+sys.path.insert(1, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import src.translator as translator
 
 
