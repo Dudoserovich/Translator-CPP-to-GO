@@ -74,7 +74,7 @@ pytest --cov=src/ tests/unit/
 ##### Запуск интеграционных тестов
 
 ```sh
-pytest --cov=src/ tests/integration_tests.py
+pytest --cov=src/ tests/integration/
 ```
 
 
