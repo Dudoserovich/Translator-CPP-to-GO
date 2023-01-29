@@ -13,6 +13,7 @@ class Generator:
     def late(self, parsed: list, filename: str):
         go_skeleton = self.__main_change(parsed)
         print("-------")
+
         # print(go_skeleton)
         # go_types = self.types(go_skeleton)
         # self.__to_go(go_types, "test")
