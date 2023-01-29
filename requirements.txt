@@ -13,3 +13,4 @@ sortedcontainers
 termcolor
 treelib
 pytest
+pytest-cov

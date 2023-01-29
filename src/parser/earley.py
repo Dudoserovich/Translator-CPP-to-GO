@@ -26,6 +26,7 @@ class Earley:
             print_str += "[" + s + "], "
 
         print(print_str + "\n")
+        return print_str
 
     def sit_equals(self, sit1: Situation, sit2: Situation):
         if sit1.left.value != sit2.left.value or len(sit1.afterDot) != len(sit2.afterDot) or len(sit1.beforeDot) != len(

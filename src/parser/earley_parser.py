@@ -25,6 +25,15 @@ class EarleyParser:
         self.tree = None
         self.lex_list = []
 
+    def get_lex(self):
+        return self.__lex
+
+    def get_grammar(self):
+        return self.__grammar
+
+    def get_earley(self):
+        return self.__earley
+
     def parse(self, file):
         self.lex_list = self.__lex.analysis(file)
         state_list = self.__earley.start(self.__grammar, self.lex_list)
@@ -147,8 +156,8 @@ class EarleyParser:
     def add_children(self, term, parent, depth) -> None:
         if self.__grammar.is_terminal(term):
             curr_lex = self.lex_list.pop()
-            term.setlex(curr_lex[0])
-            term.setline(curr_lex[2])
+            term.set_lex(curr_lex[0])
+            term.set_line(curr_lex[2])
             return
         else:
             rule = self.__grammar.get_rule(self.pi.pop())
