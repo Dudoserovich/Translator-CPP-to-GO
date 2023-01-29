@@ -65,8 +65,18 @@ python3 main.py
 
 #### Запуск тестов
 
+##### Запуск unit-тестов
+
 ```sh
-pytest tests/tests.py
+pytest --cov=src/ tests/unit/
 ```
+
+##### Запуск интеграционных тестов
+
+```sh
+pytest --cov=src/ tests/integration_tests.py
+```
+
+
 Могут быть проблемы с _lf/crlf_ при запуске тестов и какой-то из них не отработает, 
 но вроде как получилось исправить эту проблему :D

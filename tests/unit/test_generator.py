@@ -1,9 +1,6 @@
 import unittest
-import sys
-import os
 import tempfile
 
-sys.path.insert(1, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.code_generator.generator import Generator
 
