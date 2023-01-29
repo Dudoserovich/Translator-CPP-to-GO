@@ -25,6 +25,15 @@ class EarleyParser:
         self.tree = None
         self.lex_list = []
 
+    def get_lex(self):
+        return self.__lex
+
+    def get_grammar(self):
+        return self.__grammar
+
+    def get_earley(self):
+        return self.__earley
+
     def parse(self, file):
         self.lex_list = self.__lex.analysis(file)
         state_list = self.__earley.start(self.__grammar, self.lex_list)
