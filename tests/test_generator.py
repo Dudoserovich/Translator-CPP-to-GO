@@ -5,13 +5,19 @@ import tempfile
 
 sys.path.insert(1, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import src.code_generator.generator as Generator
+from src.code_generator.generator import Generator
+
 
 class TestCodeGenerator(unittest.TestCase):
+    
+    @classmethod
+    def setUpClass(cls):
+        cls.__temp_dir = tempfile.TemporaryDirectory()
+
+    def setUp(self):
+        self.__generator = Generator()
 
     def test_generator_type(self):
-        temp_dir = tempfile.TemporaryDirectory()
-        generator = Generator.Generator()
         value = [['int', 'R3', 1], ['main', 'ID', 1], ['(', 'D6', 1], [')', 'D7', 1], ['{', 'D4', 1],
                  ['bool', 'R1', 3], ['b1', 'ID', 3], [';', 'D3', 3], ['char', 'R2', 4], ['c1', 'ID', 4],
                  [';', 'D3', 4], ['int', 'R3', 5], ['i1', 'ID', 5], [';', 'D3', 5], ['float', 'R4', 6],
@@ -23,16 +29,15 @@ class TestCodeGenerator(unittest.TestCase):
                  ['3', 'N', 12], [';', 'D3', 12], ['double', 'R5', 13], ['d2', 'ID', 13], ['=', 'O15', 13],
                  ['4', 'N', 13], ['.', 'D1', 13], ['3', 'N', 13], [';', 'D3', 13], ['return', 'K10', 15],
                  ['0', 'N', 15], [';', 'D3', 15], ['}', 'D5', 16]]
-        generator.late(value, f"{temp_dir.name}/types.go")
-        with open(f'{temp_dir.name}/types.go', 'r') as f:
+
+        self.__generator.late(value, f"{self.__temp_dir.name}/types.go")
+        with open(f'{self.__temp_dir.name}/types.go', 'r') as f:
             result = f.read().replace("\r\n", "\n")
         with open('test_expected_parse/types.go', 'r') as f:
             expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_generator_operators(self):
-        temp_dir = tempfile.TemporaryDirectory()
-        generator = Generator.Generator()
         value = [['int', 'R3', 1], ['main', 'ID', 1], ['(', 'D6', 1], [')', 'D7', 1],
                  ['{', 'D4', 1], ['int', 'R3', 3], ['a', 'ID', 3], ['=', 'O15', 3],
                  ['10', 'N', 3], [';', 'D3', 3], ['int', 'R3', 4], ['b', 'ID', 4],
@@ -64,16 +69,14 @@ class TestCodeGenerator(unittest.TestCase):
                  ['a', 'ID', 25], ['!=', 'O14', 25], ['b', 'ID', 25], [';', 'D3', 25],
                  ['return', 'K10', 27], ['0', 'N', 27], [';', 'D3', 27], ['}', 'D5', 28]]
 
-        generator.late(value, f'{temp_dir.name}/operators.go')
-        with open(f'{temp_dir.name}/operators.go', 'r') as f:
+        self.__generator.late(value, f'{self.__temp_dir.name}/operators.go')
+        with open(f'{self.__temp_dir.name}/operators.go', 'r') as f:
             result = f.read().replace("\r\n", "\n")
         with open('test_expected_parse/operators.go', 'r') as f:
             expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_generator_loops(self):
-        temp_dir = tempfile.TemporaryDirectory()
-        generator = Generator.Generator()
         value = [['int', 'R3', 1], ['main', 'ID', 1], ['(', 'D6', 1], [')', 'D7', 1], ['{', 'D4', 1],
                  ['int', 'R3', 2], ['c', 'ID', 2], ['=', 'O15', 2], ['10', 'N', 2], [';', 'D3', 2],
                  ['int', 'R3', 3], ['r', 'ID', 3], ['=', 'O15', 3], ['0', 'N', 3], [';', 'D3', 3],
@@ -90,16 +93,14 @@ class TestCodeGenerator(unittest.TestCase):
                  ['r', 'ID', 16], ['<=', 'O12', 16], ['30', 'N', 16], [')', 'D7', 16], [';', 'D3', 16],
                  ['return', 'K10', 18], ['0', 'N', 18], [';', 'D3', 18], ['}', 'D5', 19]]
 
-        generator.late(value, f'{temp_dir.name}/loops.go')
-        with open(f'{temp_dir.name}/loops.go', 'r') as f:
+        self.__generator.late(value, f'{self.__temp_dir.name}/loops.go')
+        with open(f'{self.__temp_dir.name}/loops.go', 'r') as f:
             result = f.read().replace("\r\n", "\n")
         with open('test_expected_parse/loops.go', 'r') as f:
             expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_generator_main(self):
-        temp_dir = tempfile.TemporaryDirectory()
-        generator = Generator.Generator()
         value = [['int', 'R3', 1], ['main', 'ID', 1], ['(', 'D6', 1], [')', 'D7', 1], ['{', 'D4', 1], ['int', 'R3', 2],
                  ['r', 'ID', 2], ['=', 'O15', 2], ['10', 'N', 2], [';', 'D3', 2], ['int', 'R3', 3], ['c', 'ID', 3],
                  ['=', 'O15', 3], ['10', 'N', 3], [';', 'D3', 3], ['int', 'R3', 4], ['r', 'ID', 4], ['=', 'O15', 4],
@@ -136,16 +137,14 @@ class TestCodeGenerator(unittest.TestCase):
                  ['(', 'D6', 34], ['r', 'ID', 34], ['<', 'O10', 34], ['100', 'N', 34], [')', 'D7', 34],
                  [';', 'D3', 34], ['return', 'K10', 36], ['0', 'N', 36], [';', 'D3', 36], ['}', 'D5', 37]]
 
-        generator.late(value, f'{temp_dir.name}/main.go')
-        with open(f'{temp_dir.name}/main.go', 'r') as f:
+        self.__generator.late(value, f'{self.__temp_dir.name}/main.go')
+        with open(f'{self.__temp_dir.name}/main.go', 'r') as f:
             result = f.read().replace("\r\n", "\n")
         with open('test_expected_parse/main.go', 'r') as f:
             expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_generator_lextest(self):
-        temp_dir = tempfile.TemporaryDirectory()
-        generator = Generator.Generator()
         value = [['int', 'R3', 1], ['main', 'ID', 1], ['(', 'D6', 1], [')', 'D7', 1], ['{', 'D4', 1],
                  ['int', 'R3', 3], ['a', 'ID', 3], ['=', 'O15', 3], ['5', 'N', 3], [';', 'D3', 3],
                  ['float', 'R4', 4], ['b', 'ID', 4], ['=', 'O15', 4], ['4', 'N', 4], ['.', 'D1', 4],
@@ -153,16 +152,14 @@ class TestCodeGenerator(unittest.TestCase):
                  ['a', 'ID', 5], ['<=', 'O12', 5], ['b', 'ID', 5], [';', 'D3', 5], ['return', 'K10', 6],
                  ['0', 'N', 6], [';', 'D3', 6], ['}', 'D5', 7]]
 
-        generator.late(value, f'{temp_dir.name}/lextest.go')
-        with open(f'{temp_dir.name}/lextest.go', 'r') as f:
+        self.__generator.late(value, f'{self.__temp_dir.name}/lextest.go')
+        with open(f'{self.__temp_dir.name}/lextest.go', 'r') as f:
             result = f.read().replace("\r\n", "\n")
         with open('test_expected_parse/lextest.go', 'r') as f:
             expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_generator_if_then(self):
-        temp_dir = tempfile.TemporaryDirectory()
-        generator = Generator.Generator()
         value = [['int', 'R3', 1], ['main', 'ID', 1], ['(', 'D6', 1], [')', 'D7', 1], ['{', 'D4', 1],
                  ['int', 'R3', 2], ['a', 'ID', 2], ['=', 'O15', 2], ['1', 'N', 2], [';', 'D3', 2],
                  ['int', 'R3', 3], ['c', 'ID', 3], [';', 'D3', 3], ['if', 'K4', 5], ['(', 'D6', 5],
@@ -180,16 +177,14 @@ class TestCodeGenerator(unittest.TestCase):
                  ['{', 'D4', 19], ['c', 'ID', 20], ['=', 'O15', 20], ['5', 'N', 20], [';', 'D3', 20],
                  ['}', 'D5', 21], ['return', 'K10', 23], ['c', 'ID', 23], [';', 'D3', 23], ['}', 'D5', 24]]
 
-        generator.late(value, f'{temp_dir.name}/if_then.go')
-        with open(f'{temp_dir.name}/if_then.go', 'r') as f:
+        self.__generator.late(value, f'{self.__temp_dir.name}/if_then.go')
+        with open(f'{self.__temp_dir.name}/if_then.go', 'r') as f:
             result = f.read().replace("\r\n", "\n")
         with open('test_expected_parse/if_then.go', 'r') as f:
             expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
 
     def test_generator_infernal_loops(self):
-        temp_dir = tempfile.TemporaryDirectory()
-        generator = Generator.Generator()
         value = [['int', 'R3', 1], ['main', 'ID', 1], ['(', 'D6', 1], [')', 'D7', 1], ['{', 'D4', 1],
                  ['int', 'R3', 2], ['c', 'ID', 2], ['=', 'O15', 2], ['10', 'N', 2], [';', 'D3', 2],
                  ['int', 'R3', 3], ['r', 'ID', 3], ['=', 'O15', 3], ['0', 'N', 3], [';', 'D3', 3],
@@ -228,10 +223,9 @@ class TestCodeGenerator(unittest.TestCase):
                  ['r', 'ID', 33], ['<=', 'O12', 33], ['30', 'N', 33], [')', 'D7', 33], [';', 'D3', 33],
                  ['return', 'K10', 35], ['0', 'N', 35], [';', 'D3', 35], ['}', 'D5', 36]]
 
-        generator.late(value, f'{temp_dir.name}/infernal_loops.go')
-        with open(f'{temp_dir.name}/infernal_loops.go', 'r') as f:
+        self.__generator.late(value, f'{self.__temp_dir.name}/infernal_loops.go')
+        with open(f'{self.__temp_dir.name}/infernal_loops.go', 'r') as f:
             result = f.read().replace("\r\n", "\n")
         with open('test_expected_parse/infernal_loops.go', 'r') as f:
             expected = f.read().replace("\r\n", "\n")
         self.assertEqual(result, expected)
-
