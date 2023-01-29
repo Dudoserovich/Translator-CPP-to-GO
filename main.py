@@ -10,4 +10,4 @@ if __name__ == '__main__':
         for filename in files:
             print(filename.replace('.cpp', ''))
     filename = sys.argv[1] if len(sys.argv) > 1 else 'main'
-    translator("test", config.RESULTS_PATH, config.TESTS_PATH)
+    translator("operators", config.RESULTS_PATH, config.TESTS_PATH)
